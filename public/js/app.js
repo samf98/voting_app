@@ -1,6 +1,12 @@
 class ProductList extends React.Component {
+	handleProductUpVote(productId) {
+		console.log(productId + ' was upvoted.');
+	}
 	render() {
-		const productComponents = Seed.products.map((product) => (
+		const products = Seed.products.sort((a, b) => (
+			b.votes - a.votes
+		));
+		const productComponents = products.map((product) => (
 			<Product
 				key={'product-' + product.id}
 				id={product.id}
@@ -10,6 +16,7 @@ class ProductList extends React.Component {
 				votes={product.votes}
 				submitterAvatarUrl={product.submitterAvatarUrl}
 				productImageUrl={product.productImageUrl}
+				onVote={this.handleProductUpVote}
 			/>
 		));
 		return (
